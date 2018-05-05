@@ -1,0 +1,1 @@
+INSERT INTO cows VALUES('2','Sunny');
