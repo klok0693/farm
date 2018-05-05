@@ -1,6 +1,7 @@
 package by.farm.entity;
 
 import by.farm.NotNullByDefault;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +23,8 @@ import static javax.persistence.GenerationType.AUTO;
 @Entity
 @Table(name = "cows")
 @NoArgsConstructor
-public class Cow implements Cloneable{
+@AllArgsConstructor
+public class Cow {
 
     @Id
     @GeneratedValue(strategy = AUTO)

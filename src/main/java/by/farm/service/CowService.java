@@ -27,6 +27,7 @@ public class CowService {
     public void GiveBirth (Integer childCowId, String nickName) throws ServiceException {
         try {
             repository.GiveBirth(childCowId, nickName);
+            log.trace("add new cow: id="+childCowId+", name="+nickName);
         }
         catch (HibernateException e) {
             log.error("can't add new cow", e);
@@ -38,6 +39,7 @@ public class CowService {
     public void EndLifeSpan(Integer cowId) throws ServiceException {
         try {
             repository.deleteById(cowId);
+            log.trace("delete cow with id="+cowId);
         }
         catch (HibernateException e) {
             log.error("can't delete cow", e);
@@ -48,7 +50,10 @@ public class CowService {
 
     public Iterable<Cow> FindAll() throws ServiceException {
         try {
-            return repository.findAll();
+            Iterable<Cow> iterable = repository.findAll();
+            log.trace("all cows:"+iterable.toString());
+
+            return iterable;
         }
         catch (HibernateException e) {
             log.error("can't find all cows", e);

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
@@ -32,7 +34,7 @@ public class CowController {
     }
 
     @RequestMapping(method = POST)
-    public @ResponseBody boolean GiveBirth(Integer parentId, Integer childId, String childNickName) {
+    public @ResponseBody boolean GiveBirth(@Valid Integer parentId, @Valid Integer childId,@Valid String childNickName) {
         try {
             service.GiveBirth(childId, childNickName);
             return true;
@@ -43,7 +45,7 @@ public class CowController {
     }
 
     @RequestMapping(method = DELETE)
-    public @ResponseBody boolean EndLifeSpan(Integer cowId) {
+    public @ResponseBody boolean EndLifeSpan(@Valid Integer cowId) {
         try {
             service.EndLifeSpan(cowId);
             return true;

@@ -1,37 +1,37 @@
 package by.farm;
 
+import by.farm.data_structure.CowTreeMap;
+import by.farm.service.CowService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @SpringBootApplication
 public class FarmApplication {
 
 	public static void main(@Nullable String[] args) {
-		//SpringApplication.run(FarmApplication.class, args);
-		new SpringApplicationBuilder(FarmApplication.class).web(true).run(args);
+		new SpringApplicationBuilder(FarmApplication.class).web(false).run(args);
 	}
 
-	/*@Bean
+
+	//console output
+	@Bean
 	@Nonnull
 	public CommandLineRunner demo(@Nonnull CowService service) {
-		return new CommandLineRunner() {
-			// начиная со spring boot 1.5 ридонли над методом который вызывает репозиторий нужен обязательно
-			// что бы не закрывалась сессия.
-			@Override
-			//@Transactional(readOnly = true)
-			public void run(String... args) throws Exception {
-				System.out.println(service.FindAll());
+		return args -> {
 
-				service.GiveBirth(3,"Angel");
+            CowTreeMap tree = new CowTreeMap();
 
-				System.out.println(service.FindAll());
+            tree.GiveBirth(null, 1, "Brown");  //first cow
+            tree.GiveBirth(1,2,"White");       //child cow
+            tree.PrintFarmData();
 
-				service.EndLifeSpan(2);
-
-				System.out.println(service.FindAll());
-			}
-		};
-	}*/
+            tree.EndLifeSpan(1);
+            tree.PrintFarmData();
+        };
+	}
 }
